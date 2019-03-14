@@ -78,10 +78,13 @@ export const loginUser = (email, password ) => {
 
                     const uid = headers['uid'];
 
+                    const roles = response.data.data.roles;
+
                     const user = {
                         'access-token': access_token,
                         'client': client,
-                        'uid': uid
+                        'uid': uid,
+                        'roles': roles
                     };
 
                     const config = {
@@ -134,8 +137,8 @@ export const logoutUser = (user) => {
 
         axios.delete(LOGOUT_USER_ROUTE, config)
             .then((response) => {
-                dispatch({type: LOGOUT_USER_SUCCESS});
                 history.push('/');
+                dispatch({type: LOGOUT_USER_SUCCESS});
             }).catch((error) => {
             console.log(error.response);
         });

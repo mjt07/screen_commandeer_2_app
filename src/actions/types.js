@@ -1,3 +1,5 @@
+// AUTH ACTION TYPES
+
 export const EMAIL_CHANGED = 'email_changed';
 export const PASSWORD_CHANGED = 'password_changed';
 export const CLEAR_AUTH_STATE = 'clear_auth_state';
@@ -10,3 +12,8 @@ export const INVALID_PASSWORD = 'invalid_password';
 export const LOGIN_USER_SUCCESS = 'login_user_success';
 export const LOGOUT_USER_SUCCESS = 'logout_user_success';
 export const LOGOUT_USER_ROUTE = "http://192.168.1.106:3000/auth_api/v1/auth/sign_out";
+
+// SCREEN ACTION TYPES
+
+export const FETCH_SCREEN_ADS_SUCCESS = 'fetch_screen_ads_success';
+export const SCREEN_ADS_ROUTE = 'http://192.168.1.106:3000/get-screen-ads';

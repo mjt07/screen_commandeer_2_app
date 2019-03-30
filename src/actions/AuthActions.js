@@ -68,7 +68,6 @@ export const loginUser = (email, password ) => {
             })
                 .then( (response)  => {
 
-                    console.log(response);
 
                     const headers = response.headers;
 
@@ -78,14 +77,8 @@ export const loginUser = (email, password ) => {
 
                     const uid = headers['uid'];
 
-                    const roles = response.data.data.roles;
 
-                    const user = {
-                        'access-token': access_token,
-                        'client': client,
-                        'uid': uid,
-                        'roles': roles
-                    };
+                    let user;
 
                     const config = {
                         headers: {
@@ -97,16 +90,44 @@ export const loginUser = (email, password ) => {
 
                     axios.get(VALIDATE_TOKEN_ROUTE, config)
                         .then((response) => {
+
+
+
+                            const validated_headers = response.headers;
+
+                            const validated_access_token = validated_headers['access-token'];
+
+                            const validated_client = validated_headers['client'];
+
+                            const validated_uid = validated_headers['uid'];
+
+
+                            const roles = response.data.data.roles;
+
+                            user = {
+                                'access-token': validated_access_token,
+                                'client': validated_client,
+                                'uid': validated_uid,
+                                'roles': roles
+                            };
+
+
+                            dispatch({type: LOGIN_USER_SUCCESS, payload: user});
+
+                            history.push('/dashboard');
+
+
                             // in the response you get info about user as well
                         }).catch((error) => {
                         console.log(error.response);
                     });
 
 
-                    history.push('/dashboard');
 
 
-                    dispatch({type: LOGIN_USER_SUCCESS, payload: user});
+
+
+
                 })
                 .catch((error)  => {
                     const error_message = error.response.data.errors[0];

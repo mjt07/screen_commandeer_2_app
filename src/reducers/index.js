@@ -4,9 +4,11 @@ import thunk from 'redux-thunk';
 
 // place reducers here
 import AuthReducer from "./AuthReducer";
+import ScreensReducer from "./ScreensReducer";
 
 const rootReducer = combineReducers({
-    auth: AuthReducer
+    auth: AuthReducer,
+    screens: ScreensReducer
 });
 
 const store = createStore(rootReducer, {}, applyMiddleware(thunk));

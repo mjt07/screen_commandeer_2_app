@@ -8,6 +8,7 @@ import store from './reducers';
 import Login from "./screens/Login";
 import ResetPassword from "./screens/ResetPassword";
 import Dashboard from "./screens/Dashboard";
+import Screens from "./screens/Screens";
 
 
 ReactDOM.render(
@@ -18,6 +19,7 @@ ReactDOM.render(
                     <Route exact path="/" component={Login} />
                     <Route path="/reset-password" component={ResetPassword} />
                     <Route path="/dashboard" component={Dashboard} />
+                    <Route path="/screens" component={Screens} />
                 </Switch>
             </div>
         </Router>

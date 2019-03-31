@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {has_role} from "../helpers";
 import history from "../history";
-import {fetch_screen_ads, playAds, stopPlayAds} from "../actions";
+import {fetch_screen_ads, playAds, stopPlayAds, adsFrequencyChanged} from "../actions";
 import _ from "lodash";
 import { Link } from 'react-router-dom'
 
@@ -37,6 +37,9 @@ class Screens extends  Component {
 
 
         let slideIndex = 0;
+
+        const frequency = this.props.frequency;
+
         showSlides();
 
         function showSlides() {
@@ -53,7 +56,7 @@ class Screens extends  Component {
             }
             slides[slideIndex-1].style.display = "block";
             slides[slideIndex-1].className += " active";
-            setTimeout(showSlides, 2000 ); // Change image every 2 seconds
+            setTimeout(showSlides, frequency ); // Change image every 2 seconds
         }
 
     }
@@ -139,6 +142,10 @@ class Screens extends  Component {
         ads_player.webkitRequestFullscreen();
     }
 
+    adsFrequencyChanged(e){
+        let freq = parseInt(e.target.value) * 1000;
+        this.props.adsFrequencyChanged(freq);
+    }
 
     render(){
         if(!this.props.playing){
@@ -148,6 +155,25 @@ class Screens extends  Component {
                     <div>
 
                         <h1>Screens</h1>
+
+                        <div>
+
+                            <span>Change ads every</span>
+
+                            <input type="number"
+                                   value ={this.props.frequency / 1000}
+                                   onChange={this.adsFrequencyChanged.bind(this)}
+                                   name="quantity"
+                                   min="1"
+                            />
+
+                            <span> seconds</span>
+
+                        </div>
+
+
+                        <br/>
+
                         {this.render_screen_ads()}
 
                     </div>
@@ -194,8 +220,8 @@ class Screens extends  Component {
 
 function mapStateToProps(state) {
     const {user} = state.auth;
-    const {screen_ads, playing, selected_screen_id} = state.screens;
-    return {user, screen_ads, playing, selected_screen_id};
+    const {screen_ads, playing, selected_screen_id, frequency} = state.screens;
+    return {user, screen_ads, playing, selected_screen_id, frequency};
 }
 
-export default connect(mapStateToProps, {fetch_screen_ads, playAds, stopPlayAds})(Screens);
+export default connect(mapStateToProps, {fetch_screen_ads, playAds, stopPlayAds, adsFrequencyChanged})(Screens);

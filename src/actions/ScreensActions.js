@@ -2,13 +2,22 @@ import {
    FETCH_SCREEN_ADS_SUCCESS,
     SCREEN_ADS_ROUTE,
     PLAY_ADS,
-    STOP_PLAY_ADS
+    STOP_PLAY_ADS,
+    ADS_FREQUENCY_CHANGED
 } from "./types";
 
 import axios from "axios";
 
 import _ from "lodash";
 
+
+export const adsFrequencyChanged = (frequency) => {
+
+    return(dispatch) => {
+        dispatch({type: ADS_FREQUENCY_CHANGED, payload: frequency})
+    };
+
+};
 
 export const stopPlayAds = () => {
 

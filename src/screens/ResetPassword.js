@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {emailChanged, clearAuthState} from "../actions/AuthActions";
-
+import { Link } from 'react-router-dom'
 
 class ResetPassword extends Component{
 
@@ -36,6 +36,10 @@ class ResetPassword extends Component{
                     <br/>
 
                     <button>Submit</button>
+
+                    <br/>
+
+                    <Link to="/">Login</Link>
 
                 </form>
 

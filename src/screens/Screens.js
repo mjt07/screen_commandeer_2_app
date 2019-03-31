@@ -24,10 +24,13 @@ class Screens extends  Component {
 
 
     componentDidUpdate(){
-        if(this.props.playing){
+
+        if( document.getElementsByClassName("mySlides").length > 0 && this.props.playing ){
             this.showAds();
         }
+
     }
+
 
     showAds(){
 

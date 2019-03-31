@@ -18,3 +18,4 @@ export const LOGOUT_USER_ROUTE = "http://192.168.1.106:3000/auth_api/v1/auth/sig
 export const FETCH_SCREEN_ADS_SUCCESS = 'fetch_screen_ads_success';
 export const SCREEN_ADS_ROUTE = 'http://192.168.1.106:3000/get-screen-ads';
 export const PLAY_ADS = 'play_ads';
+export const STOP_PLAY_ADS = 'stop_play_ads';

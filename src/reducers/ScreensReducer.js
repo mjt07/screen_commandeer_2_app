@@ -1,6 +1,7 @@
 import {
     FETCH_SCREEN_ADS_SUCCESS,
-    PLAY_ADS
+    PLAY_ADS,
+    STOP_PLAY_ADS
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -18,6 +19,10 @@ export default (state = INITIAL_STATE, action) => {
         case PLAY_ADS:
             return{
                 ...state, playing: true, selected_screen_id: action.payload
+            };
+        case STOP_PLAY_ADS:
+            return{
+                ...state, playing: false, selected_screen_id: null
             };
         default:
             return state;

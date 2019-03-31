@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {has_role} from "../helpers";
 import history from "../history";
-import {fetch_screen_ads, playAds} from "../actions";
+import {fetch_screen_ads, playAds, stopPlayAds} from "../actions";
 import _ from "lodash";
+import { Link } from 'react-router-dom'
 
 class Screens extends  Component {
 
@@ -22,14 +23,13 @@ class Screens extends  Component {
     }
 
 
-   componentDidUpdate(){
+    componentDidUpdate(){
         if(this.props.playing){
             this.showAds();
         }
-   }
+    }
 
     showAds(){
-
 
 
 
@@ -50,8 +50,7 @@ class Screens extends  Component {
             }
             slides[slideIndex-1].style.display = "block";
             slides[slideIndex-1].className += " active";
-            setTimeout(showSlides, 2000); // Change image every 2 seconds
-            const elem = document.getElementById("root");
+            setTimeout(showSlides, 2000 ); // Change image every 2 seconds
         }
 
     }
@@ -62,11 +61,10 @@ class Screens extends  Component {
 
 
         const ads = this.props.screen_ads[this.props.selected_screen_id].ads;
-        console.log(ads);
         return ads.map(ad => {
             return(
                 <div key={ad.id} className="mySlides fade">
-                    <img src={ad.media_file_url}  />
+                    <img src={ad.media_file_url} className="ad-image" />
                 </div>
             );
         });
@@ -129,24 +127,59 @@ class Screens extends  Component {
     }
 
 
+    stopSlideShow(){
+        this.props.stopPlayAds();
+    }
 
-
+    enterFullScreen(){
+        const ads_player = document.getElementById("ads-player");
+        ads_player.webkitRequestFullscreen();
+    }
 
 
     render(){
         if(!this.props.playing){
             return(
                 <div>
-                    <h1>Screens</h1>
-                    {this.render_screen_ads()}
+
+                    <div>
+
+                        <h1>Screens</h1>
+                        {this.render_screen_ads()}
+
+                    </div>
+
+                    <br/>
+
+                    <Link to="/dashboard">Back</Link>
+
+
                 </div>
             );
         }else{
             return(
                 <div>
-                    <div className="screen-ads-container">
+
+                    <div className="ads-container" id="ads-player">
                         {this.play_screen_ads()}
                     </div>
+
+                    <div className="ads-player-button-container" >
+
+                        <button onClick={this.stopSlideShow.bind(this)}>
+                            Exit
+                        </button>
+
+                        <button onClick={this.enterFullScreen.bind(this)}>
+                            Enter Full Screen
+                        </button>
+
+
+
+                    </div>
+
+
+
                 </div>
             );
 
@@ -162,4 +195,4 @@ function mapStateToProps(state) {
     return {user, screen_ads, playing, selected_screen_id};
 }
 
-export default connect(mapStateToProps, {fetch_screen_ads, playAds})(Screens);
+export default connect(mapStateToProps, {fetch_screen_ads, playAds, stopPlayAds})(Screens);

@@ -1,12 +1,23 @@
 import {
    FETCH_SCREEN_ADS_SUCCESS,
     SCREEN_ADS_ROUTE,
-    PLAY_ADS
+    PLAY_ADS,
+    STOP_PLAY_ADS
 } from "./types";
 
 import axios from "axios";
 
 import _ from "lodash";
+
+
+export const stopPlayAds = () => {
+
+    return(dispatch) => {
+      dispatch({type: STOP_PLAY_ADS}) ;
+    };
+
+};
+
 
 export const playAds = (selected_screen_id) => {
     return(dispatch) => {

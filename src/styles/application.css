@@ -30,6 +30,74 @@
   animation-duration: 1.5s;
 }
 
+
+
+.divStyle {
+  background-color: white;
+  display: table;
+  position: fixed;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.h2Style {
+  display: block;
+  font-family:  Calibri, Helvetica, sans-serif;
+  color: black;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.textStyle {
+  display: block;
+  font-family:  Calibri, Helvetica, sans-serif;
+  color: white;
+  text-align: center
+}
+
+.inputStyle {
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  height: 30px;
+  border: 1px solid #41d0f4;
+  border-radius: 3px;
+}
+
+
+
+.buttonStyle {
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+  height: 35px;
+  background-color: #41d0f4;
+  color: white;
+  border: 1px solid white;
+  border-radius: 8px;
+  transition: background .1s ease-in;
+  padding: 5px;
+}
+
+.buttonStyle:hover {
+  display: block;
+  margin: 0 auto;
+  background-color: #411cf4;
+  color: white;
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+
 @-webkit-keyframes fade {
   from {opacity: .4}
   to {opacity: 1}

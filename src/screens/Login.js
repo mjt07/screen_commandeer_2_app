@@ -37,9 +37,9 @@ class Login extends Component{
     emailError(){
 
         if(this.props.emailError !== ""){
-                    return(
-                        <p>{this.props.emailError}</p>
-                    );
+            return(
+                <p>{this.props.emailError}</p>
+            );
         }
 
     }
@@ -57,7 +57,7 @@ class Login extends Component{
         const passwordError = this.props.passwordError;
         if(passwordError !== ""){
             return (
-              <p>{passwordError}</p>
+                <p>{passwordError}</p>
             );
         }
     }
@@ -66,56 +66,49 @@ class Login extends Component{
     {
         return(
 
-            <div>
-
-                <h2>Login</h2>
+            <div className="divStyle">
+                <h1 className="h2Style">Login</h1>
+                <br/>
 
                 <form>
-
-
                     <div>
-                        <label>Email</label><br/>
                         <input
+                            className="inputStyle"
                             type="text"
+                            placeholder="Email"
                             value={this.props.email}
                             onChange={this.onEmailChange.bind(this)} />
                     </div>
 
-
                     <div>
-                        <label>Password</label><br/>
                         <input
+                            className="inputStyle"
                             type="password"
+                            placeholder="Password"
                             value={this.props.password}
                             onChange={this.onPasswordChange.bind(this)} />
                     </div>
 
                     <br/>
 
-
                     <button
-                        onClick={this.login.bind(this)}
-                    >Login</button>
+                        className="buttonStyle"
+                        onClick={this.login.bind(this)}>Login</button>
 
                     {this.emailError()}
-
 
                     {this.loginError()}
 
                     {this.passwordError()}
 
 
-
-
-
                 </form>
 
-                <Link to="/reset-password" >Forgot your password?</Link>
+                <br/>
 
-
+                <Link  to="/reset-password" >Forgot your password?</Link>
 
             </div>
-
         );
     }
 }
@@ -124,5 +117,6 @@ function mapStateToProps(state) {
     const {email, password,  emailError, passwordError, error, isLoggedIn} = state.auth;
     return {email, password, emailError, passwordError, error, isLoggedIn};
 }
+
 
 export default connect(mapStateToProps, { emailChanged, passwordChanged, clearAuthState, loginUser })(Login);

@@ -1,5 +1,5 @@
 import {
-   FETCH_SCREEN_ADS_SUCCESS,
+    FETCH_SCREEN_ADS_SUCCESS,
     SCREEN_ADS_ROUTE,
     PLAY_ADS,
     STOP_PLAY_ADS,
@@ -22,7 +22,7 @@ export const adsFrequencyChanged = (frequency) => {
 export const stopPlayAds = () => {
 
     return(dispatch) => {
-      dispatch({type: STOP_PLAY_ADS}) ;
+        dispatch({type: STOP_PLAY_ADS}) ;
     };
 
 };
@@ -73,7 +73,9 @@ export const fetch_screen_ads = (user) => {
 
                         let ads = [];
 
+
                         _.forEach(screen.ads, (ad => {
+
 
                             let ad_item = {};
 
@@ -81,9 +83,16 @@ export const fetch_screen_ads = (user) => {
 
                             ad_item.name = ad.ad_title;
 
-                            ad_item.media_file_url = ad.media_file.url;
+                            if(ad.image_file.url !== null){
+                                ad_item.media_file_url = ad.image_file.url;
+                                ad_item.file_type = "image";
+                            }else{
+                                ad_item.media_file_url = ad.video_file.url;
+                                ad_item.file_type = "video";
+                            }
 
                             ad_item.id = ad.id;
+
 
                             ads.push(ad_item);
 
@@ -95,9 +104,6 @@ export const fetch_screen_ads = (user) => {
 
                     }
                 );
-
-
-
 
 
                 dispatch({type: FETCH_SCREEN_ADS_SUCCESS, payload: screen_ads});

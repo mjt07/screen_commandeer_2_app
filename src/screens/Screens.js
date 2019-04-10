@@ -20,6 +20,7 @@ class Screens extends  Component {
         }
 
 
+
     }
 
 
@@ -33,8 +34,6 @@ class Screens extends  Component {
 
 
     showAds(){
-
-
 
         let slideIndex = 0;
 
@@ -56,6 +55,10 @@ class Screens extends  Component {
             }
             slides[slideIndex-1].style.display = "block";
             slides[slideIndex-1].className += " active";
+            let nested_child = slides[slideIndex-1].children[0];
+            if(nested_child.tagName === "VIDEO"){
+                nested_child.play();
+            }
             setTimeout(showSlides, frequency ); // Change image every 2 seconds
         }
 
@@ -68,11 +71,25 @@ class Screens extends  Component {
 
         const ads = this.props.screen_ads[this.props.selected_screen_id].ads;
         return ads.map(ad => {
-            return(
-                <div key={ad.id} className="mySlides fade">
-                    <img src={ad.media_file_url} className="ad-image" />
-                </div>
-            );
+
+            if(ad.file_type === "image"){
+                return(
+                    <div key={ad.id} className="mySlides fade">
+                        <img src={ad.media_file_url} className="ad-image" />
+                    </div>
+                );
+            }else{
+                return(
+                    <div key={ad.id} className="mySlides fade">
+                        <video className="ad-video" >
+                            <source src={ad.media_file_url} />
+                        </video>
+                    </div>
+                );
+            }
+
+
+
         });
 
 
@@ -98,34 +115,36 @@ class Screens extends  Component {
             return screen_ads_arr.map(screen_ad => {
 
 
-                return(
 
-                    <div key={screen_ad.id}>
+                    return(
 
-                        <h1>{screen_ad.screen_name}</h1>
-                        <h3>{screen_ad.screen_address}</h3>
+                        <div key={screen_ad.id}>
 
-                        {
-                            screen_ad.ads.map(ad => {
-                                return(
-                                    <div key={ad.id}>
-                                        <h4>{ad.name}</h4>
-                                        <a href={ad.media_file_url}>View</a>
-                                    </div>
+                            <h1>{screen_ad.screen_name}</h1>
+                            <h3>{screen_ad.screen_address}</h3>
 
-                                );
-                            })
-                        }
+                            {
+                                screen_ad.ads.map(ad => {
+                                    return(
+                                        <div key={ad.id}>
+                                            <h4>{ad.name}</h4>
+                                            <a href={ad.media_file_url}>View</a>
+                                        </div>
 
-                        <button data-screenId={screen_ad.id} onClick={this.startSlideShow.bind(this)}>
-                            Play
-                        </button>
+                                    );
+                                })
+                            }
 
-
-                    </div>
+                            <button data-screenId={screen_ad.id} onClick={this.startSlideShow.bind(this)}>
+                                Play
+                            </button>
 
 
-                );
+                        </div>
+
+
+                    );
+
 
             });
 

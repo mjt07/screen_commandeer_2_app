@@ -100,6 +100,43 @@ class Screens extends  Component {
         this.props.playAds(screen_id);
     }
 
+
+    render_screen_ad(screen_ad){
+
+        if(screen_ad.ads.length > 0){
+            return(
+
+                <div>
+
+                    {
+                        screen_ad.ads.map(ad => {
+                            return(
+                                <div key={ad.id}>
+                                    <h4>{ad.name}</h4>
+                                    <a href={ad.media_file_url}>View</a>
+                                </div>
+
+                            );
+                        })
+                    }
+
+                    <button data-screenId={screen_ad.id} onClick={this.startSlideShow.bind(this)}>
+                        Play
+                    </button>
+
+
+                </div>
+
+
+            );
+        }else{
+            return(
+              <p>No ads found</p>
+            );
+        }
+
+    }
+
     render_screen_ads(){
 
         const screen_ads = this.props.screen_ads;
@@ -112,6 +149,7 @@ class Screens extends  Component {
 
             const screen_ads_arr = _.values(screen_ads);
 
+
             return screen_ads_arr.map(screen_ad => {
 
 
@@ -123,22 +161,8 @@ class Screens extends  Component {
                             <h1>{screen_ad.screen_name}</h1>
                             <h3>{screen_ad.screen_address}</h3>
 
-                            {
-                                screen_ad.ads.map(ad => {
-                                    return(
-                                        <div key={ad.id}>
-                                            <h4>{ad.name}</h4>
-                                            <a href={ad.media_file_url}>View</a>
-                                        </div>
-
-                                    );
-                                })
-                            }
-
-                            <button data-screenId={screen_ad.id} onClick={this.startSlideShow.bind(this)}>
-                                Play
-                            </button>
-
+                            {this.render_screen_ad(screen_ad)}
+                            
 
                         </div>
 

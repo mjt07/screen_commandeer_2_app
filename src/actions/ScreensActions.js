@@ -73,7 +73,6 @@ export const fetch_screen_ads = (user) => {
 
                         let ads = [];
 
-
                         _.forEach(screen.ads, (ad => {
 
 
